@@ -1,10 +1,33 @@
 <h4>항목 체크</h4>
-<span *ngFor="let item of checkList; let i = index">
+<!-- <span *ngFor="let item of checkList; let i = index">
   <label for="chk-{{ i + 1 }}">{{ item }}</label>
   <input type="checkbox" id="chk-{{ i + 1 }}" [(ngModel)]="checkedResult[i]" />
-</span>
-<button (click)="extractCheckedResult()">결과 출력</button>
-<app-check-list-result
+</span> -->
+<!-- <app-check-list-result
   [checkedResult]="checkedResultData"
   (onSelectedToRemoveItem)="removeCheckedItem($event)"
+></app-check-list-result>
+<button (click)="extractCheckedResult()">결과 출력</button> -->
+
+<h4>항목 체크</h4>
+<div class="row">
+  <label>항목 증감</label>
+  <button type="button" (click)="onChangeCnt('+')">+</button>
+  <button type="button" (click)="onChangeCnt('-')">-</button>
+</div>
+<div class="row">
+  <span *ngFor="let item of checkList; let i = index">
+    <label for="chk-{{ item.idx }}">{{ item.content }}</label>
+    <input
+      type="checkbox"
+      id="chk-{{ item.idx }}"
+      (ngModelChange)="onChecked($event, item)"
+      [(ngModel)]="item.isChecked"
+    />
+  </span>
+</div>
+
+<app-check-list-result
+  [checkItem]="curCheckedItem"
+  (onSelectedToRemoveItem)="unCheckedItem($event)"
 ></app-check-list-result>
