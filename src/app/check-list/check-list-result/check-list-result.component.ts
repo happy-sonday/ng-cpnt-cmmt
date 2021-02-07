@@ -33,6 +33,9 @@ export class CheckListResultComponent implements OnInit {
       );
     }
     this.checkedCnt = this._checkedData.length;
+    console.log(
+      `check-list의 컴포넌트에서 전달된 PassCheckItem 최종 크기 ${this.checkedCnt}`
+    );
   }
 
   onRemove(idx) {
