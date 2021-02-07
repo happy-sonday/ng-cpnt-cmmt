@@ -6,4 +6,5 @@
 <button (click)="extractCheckedResult()">결과 출력</button>
 <app-check-list-result
   [checkedResult]="checkedResultData"
+  (onSelectedToRemoveItem)="removeCheckedItem($event)"
 ></app-check-list-result>
