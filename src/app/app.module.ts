@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
+
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -10,7 +11,7 @@ import { CheckListComponent } from './check-list/check-list.component';
 
 @NgModule({
   declarations: [AppComponent, CheckListComponent, CheckListResultComponent],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpModule],
+  imports: [BrowserModule, HttpClientModule, AppRoutingModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })
