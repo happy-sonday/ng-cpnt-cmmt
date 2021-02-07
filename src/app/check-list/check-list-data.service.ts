@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
+
 import { CheckItem } from './check-item';
 
 @Injectable({
@@ -6,6 +7,9 @@ import { CheckItem } from './check-item';
 })
 export class CheckListDataService {
   private checkList: CheckItem[] = [];
+  private totalCnt: number;
+  private curCnt: number;
+  changedCntStat: EventEmitter<any> = new EventEmitter<any>();
 
   /**
    *
@@ -31,9 +35,12 @@ export class CheckListDataService {
       const totalCnt = this.checkList.length;
       const newItem = this.getNewCheckItem(totalCnt + 1);
       this.checkList.push(newItem);
-    } else if (op === '-') {
+    }
+    if (op === '-') {
       this.checkList.pop();
     }
+
+    this.changedCntStat.emit({});
   }
 
   /**
@@ -42,7 +49,6 @@ export class CheckListDataService {
    * @return {*}
    * @memberof CheckListDataService
    */
-
   getCheckedItemRatioText() {
     const curCnt = this.checkList.filter((i) => i.isChecked).length;
     const totalCnt = this.checkList.length;
@@ -62,8 +68,10 @@ export class CheckListDataService {
 
   checkItem(checkItem: CheckItem) {
     this.checkList[checkItem.idx - 1] = checkItem;
+    this.changedCntStat.emit({});
   }
   unCheckItem(idx: number) {
     this.checkList[idx - 1].isChecked = false;
+    this.changedCntStat.emit({});
   }
 }
