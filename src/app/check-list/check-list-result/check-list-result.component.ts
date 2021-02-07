@@ -20,7 +20,7 @@ export class CheckListResultComponent implements OnInit {
   ngOnInit() {}
 
   @Input()
-  set checkItem(curItemEvent: CheckItem) {
+  set PassCheckItem(curItemEvent: CheckItem) {
     if (!curItemEvent) {
       return;
     }

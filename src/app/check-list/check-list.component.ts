@@ -8,42 +8,9 @@ import { CheckListDataService } from './check-list-data.service';
   styleUrls: ['./check-list.component.scss'],
 })
 export class CheckListComponent implements OnInit {
-  INIT_TOTAL_CNT: number = 4;
-  checkList: CheckItem[] = [];
+  INIT_TOTAL_CNT: number = 4; //초기항목 갯수 전달
+  checkList: CheckItem[] = []; //CheckItem구조를 가진 가변적 배열
   curCheckedItem: CheckItem;
-
-  // checkList: string[];
-
-  // checkedResultData: string[];
-  // checkedResult: boolean[] = [];
-
-  // constructor() {
-  //   this.checkList = [
-  //     'check list one',
-  //     'check list two',
-  //     'check list three',
-  //     'check list four',
-  //   ];
-  //   this.checkList.forEach(() => this.checkedResult.push(false));
-  // }
-
-  // extractCheckedResult() {
-  //   this.checkedResultData = [];
-  //   this.checkedResult.forEach((isChecked, idx) => {
-  //     if (isChecked) {
-  //       this.checkedResultData.push(this.checkList[idx]);
-  //     }
-  //   });
-  // }
-
-  // removeCheckedItem(removeItem) {
-  //   this.checkedResult.forEach((isChecked, _id) => {
-  //     if (isChecked && this.checkList[_id] === removeItem) {
-  //       this.checkedResult[_id] = false;
-  //       this.extractCheckedResult();
-  //     }
-  //   });
-  // }
 
   ngOnInit() {}
 
@@ -51,10 +18,23 @@ export class CheckListComponent implements OnInit {
     this.checkList = this.checkListDataService.initList(this.INIT_TOTAL_CNT);
   }
 
+  /**
+   *
+   * '+', '-' 버튼에 따른 새로운 항목연산에 필요한 인자 전달
+   * @param {string} op
+   * @memberof CheckListComponent
+   */
   onChangeCnt(op: string) {
     this.checkListDataService.changeTotalCntByOp(op);
   }
 
+  /**
+   *
+   * 항목을 체크할때마다 $event 인자에 담아 호출
+   * @param {*} isChecked
+   * @param {CheckItem} checkedItem
+   * @memberof CheckListComponent
+   */
   onChecked(isChecked, checkedItem: CheckItem) {
     checkedItem.isChecked = isChecked;
     this.curCheckedItem = checkedItem;

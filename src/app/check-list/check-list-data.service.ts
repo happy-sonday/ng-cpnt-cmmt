@@ -7,8 +7,6 @@ import { CheckItem } from './check-item';
 })
 export class CheckListDataService {
   private checkList: CheckItem[] = [];
-  private totalCnt: number;
-  private curCnt: number;
   changedCntStat: EventEmitter<any> = new EventEmitter<any>();
 
   /**
@@ -20,7 +18,7 @@ export class CheckListDataService {
   initList(totalCnt) {
     for (let i = 0; i < totalCnt; i++) {
       const checkItem = this.getNewCheckItem(i + 1);
-      this.checkList.push(checkItem);
+      this.checkList.push(checkItem); //배열의 끝에 요소 추가
     }
     return this.checkList;
   }
@@ -37,7 +35,7 @@ export class CheckListDataService {
       this.checkList.push(newItem);
     }
     if (op === '-') {
-      this.checkList.pop();
+      this.checkList.pop(); //마지막 요소를 제거
     }
 
     this.changedCntStat.emit({});
@@ -50,6 +48,7 @@ export class CheckListDataService {
    * @memberof CheckListDataService
    */
   getCheckedItemRatioText() {
+    //filter 주어진 함수의 조건이 통과되는 요소를 모아 새로운 배열로 반환, 그것의 크기를 curCnt 담음
     const curCnt = this.checkList.filter((i) => i.isChecked).length;
     const totalCnt = this.checkList.length;
     const roundedRatio = Math.round((curCnt / totalCnt) * 100);
@@ -60,6 +59,14 @@ export class CheckListDataService {
     return { idx: idx, content: this.getCheckListMsg(idx), isChecked: false };
   }
 
+  /**
+   *
+   *항목의 이름을 만듦
+   * @private
+   * @param {number} idx
+   * @return {*}  {string}
+   * @memberof CheckListDataService
+   */
   private getCheckListMsg(idx: number): string {
     return `check list ${idx}`;
   }

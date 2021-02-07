@@ -2,6 +2,7 @@
 <!-- <button type="button" (click)="onPrintGraph()">그래프 출력</button> -->
 <div class="chart" *ngIf="graphToggle">
   <div class="grid">
+    <!-- checkedRatio값에 따라 막대그래프의 높이가결정 됨 -->
     <span [style.height]="checkedRatio" [title]="checkedRatio"></span>
   </div>
 </div>

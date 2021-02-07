@@ -17,6 +17,10 @@
 </div>
 <div class="row">
   <span *ngFor="let item of checkList; let i = index">
+    <!-- label의 for는 같은 레벨에 있는 id를 찾아  연결-->
+    <!-- ngModelChange는 @Output 지시자와 함께 model이 변경되면 반영
+        즉, ngModel의 지시자 @Output이 없으면 이벤트가 발생하지 않는다. -->
+    <!-- (change)는 ngModel없이 메서드를 정의가능 -->
     <label for="chk-{{ item.idx }}">{{ item.content }}</label>
     <input
       type="checkbox"
@@ -26,8 +30,9 @@
     />
   </span>
 </div>
-
+<!-- onChecked()에 의해 check-list 컴포넌트의 curCheckedItem의 상태가 변화되는데,
+이 값을 check-list-result 자식컴포넌트의 @Input set 메서드의 PassCheckItem에 정보를 전달 -->
 <app-check-list-result
-  [checkItem]="curCheckedItem"
+  [PassCheckItem]="curCheckedItem"
   (onSelectedToRemoveItem)="unCheckedItem($event)"
 ></app-check-list-result>
